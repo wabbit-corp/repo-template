@@ -4,7 +4,7 @@
 
 Thank you for your interest in contributing to the Wabbit Consulting Corporation ("Wabbit Consulting") project. This Contributor License Agreement ("Agreement") sets out the terms under which intellectual property has been contributed to the project.
 
-### 1. Definitions
+### 1. Definitions 
 
 - **"You"** means the individual or legal entity making the contribution.
 - **"Contribution"** means any work of authorship, including any modifications or additions to an existing work, that is intentionally submitted by You to Wabbit Consulting for inclusion in the project.
