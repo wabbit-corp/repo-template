@@ -1,6 +1,6 @@
 # Contributor License Agreement (CLA)
 
-## Wabbit Consulting Corporation Contributor License Agreement
+## Wabbit Consulting Corporation Contributor License Agreement 
 
 Thank you for your interest in contributing to the Wabbit Consulting Corporation ("Wabbit Consulting") project. This Contributor License Agreement ("Agreement") sets out the terms under which intellectual property has been contributed to the project.
 
