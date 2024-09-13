@@ -35,10 +35,10 @@ You represent that your Contribution submissions include complete details of any
 #### 3.4. Age and Consent
 You represent that you are of legal age to form a binding contract in your jurisdiction (which may be 18, 16, or another age as defined by local laws). If you are under the age of majority, you must have your parent or guardian's verifiable permission to contribute and enter into this Agreement.
 
-### 3.5 Consent for Attribution
+#### 3.5 Consent for Attribution
 You consent to the use of your name, username, and any other identifying information you provide for the purpose of giving attribution for your Contributions.
 
-### 3.6 Compliance with Laws
+#### 3.6 Compliance with Laws
 You represent that your Contributions and your entering into this Agreement comply with all applicable local, state, national, and international laws and regulations.
 
 ### 4. Third-Party Submissions
