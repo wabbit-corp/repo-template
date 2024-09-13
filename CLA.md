@@ -7,20 +7,26 @@ Thank you for your interest in contributing to the {{COMPANY_FULL_NAME}} ("{{COM
 ### 1. Definitions
 
 - **"You"** means the individual or legal entity making the contribution.
-- **"Contribution"** means any work of authorship, including any modifications or additions to an existing work, that is intentionally submitted by You to {{COMPANY_NAME}} for inclusion in the project.
+- **"Contribution"** means any original work of authorship, including any modifications or additions to an existing work, that is intentionally submitted by You to {{COMPANY_NAME}} for inclusion in the Project, such as source code, documentation, or other materials. For example, submitting a pull request or patch via email constitutes a Contribution.
 - **"Project"** means the software project primarily licensed under the GNU Affero General Public License v3.0 (AGPL-3.0) and managed by {{COMPANY_NAME}}, with the understanding that {{COMPANY_NAME}} may also offer commercial licensing options.
 
 ### 2. Grant of Copyright License
 
 You hereby grant to {{COMPANY_NAME}} and to recipients of software distributed by {{COMPANY_NAME}} a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare derivative works of, publicly display, publicly perform, sublicense, and distribute your Contributions and such derivative works.
 
-To the extent permissible by applicable law, you agree not to assert any moral rights in your Contributions against {{COMPANY_NAME}} or its licensees.
+To the extent permissible by applicable law, you agree not to assert any moral rights in your Contributions against {{COMPANY_NAME}} or its licensees. Where waiver of moral rights is not permissible under applicable law, you agree to grant to {{COMPANY_NAME}} and its licensees a non-exclusive, perpetual, irrevocable, worldwide, royalty-free license to exercise all moral rights in your Contributions to the fullest extent allowed by law.
+
+### 2.1 Grant of Patent License
+
+You hereby grant to {{COMPANY_NAME}} and to recipients of software distributed by {{COMPANY_NAME}} a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer your Contribution, where such license applies only to those patent claims licensable by you that are necessarily infringed by your Contribution alone or by combination of your Contribution with the Project to which you contributed
 
 ### 3. Representations and Warranties
 
 You represent that you are legally entitled to grant the above license. If your employer(s) has rights to intellectual property that you create that includes your Contributions, you represent that you have received permission to make Contributions on behalf of that employer, or that your employer has waived such rights for your Contributions to {{COMPANY_NAME}}.
 
 You represent that each of your Contributions is your original creation. You represent that your Contribution submissions include complete details of any third-party license or other restriction (including, but not limited to, related patents and trademarks) of which you are personally aware and which are associated with any part of your Contributions.
+
+You consent to the use of your name, username, and any other identifying information you provide for the purpose of giving attribution for your Contributions.
 
 ### 4. Third-Party Submissions
 
@@ -38,9 +44,13 @@ By submitting Contributions, you understand and agree that {{COMPANY_NAME}} may 
 
 You agree that the opportunity to participate in the development of the Project and the potential for your Contributions to be included in the Project constitute good and valuable consideration for the rights granted herein. You understand and agree that you will not receive any monetary compensation or payment for your Contributions. Your Contributions are made voluntarily and without any expectation of financial reward. {{COMPANY_NAME}} may, at its sole discretion, choose to offer rewards, acknowledgments, or other forms of non-monetary recognition for significant contributions, but such recognition is not guaranteed and does not constitute compensation for your Contributions.
 
+### 7.1 Independent Contributor
+
+You agree that you are participating as an independent contributor and not as an employee, agent, or representative of {{COMPANY_NAME}}. Nothing in this Agreement shall be construed to create any partnership, joint venture, or employer-employee relationship between you and {{COMPANY_NAME}}.
+
 ### 8. Age and Capacity
 
-You represent that you are of legal age to form a binding contract in your jurisdiction. If you are under the age of majority, you must have your parent or guardian's permission to contribute and enter into this Agreement.
+You represent that you are of legal age to form a binding contract in your jurisdiction (which may be 18, 16, or another age as defined by local laws). If you are under the age of majority, you must have your parent or guardian's verifiable permission to contribute and enter into this Agreement.
 
 ### 9. Data Protection and Privacy
 
@@ -48,9 +58,13 @@ You represent that you are of legal age to form a binding contract in your juris
 
 ### 10. Indemnification and Liability Limitations
 
-You agree to indemnify and hold harmless {{COMPANY_NAME}}, its officers, directors, and agents, against any claim arising from your breach of the representations and warranties in this Agreement. This indemnification obligation shall be limited to actual damages incurred by {{COMPANY_NAME}}, and in no event shall your total liability exceed $500.
+To the extent permitted by applicable law, you agree to indemnify and hold harmless {{COMPANY_NAME}}, its officers, directors, and agents, against any claim arising from your breach of the representations and warranties in this Agreement. This indemnification obligation shall be limited to actual damages incurred by {{COMPANY_NAME}}, and in no event shall your total liability exceed the actual damages incurred by {{COMPANY_NAME}} as a direct result of your breach.
 
 CONTRIBUTIONS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. IN NO EVENT SHALL YOU BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH YOUR CONTRIBUTIONS OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTIONS.
+
+### 10.1 Disclaimer of Warranties and Limitation of Liability
+
+THE PROJECT AND ANY DERIVATIVE WORKS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. IN NO EVENT SHALL {{COMPANY_NAME}} BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, ARISING IN ANY WAY OUT OF THE USE OF THE PROJECT, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### 11. Term and Termination
 
@@ -82,7 +96,7 @@ This Agreement is version 1.0. {{COMPANY_NAME}} may release new versions of this
 
 ### 13. Dispute Resolution
 
-Any dispute arising out of or relating to this Agreement shall be resolved through binding arbitration in Ontario, Canada, in accordance with the rules of the ADR Institute of Canada. The arbitration shall be conducted by a single arbitrator. The decision of the arbitrator shall be final and binding on both parties. Either party may seek enforcement of the arbitration decision in any court of competent jurisdiction.
+Any dispute arising out of or relating to this Agreement shall be resolved through binding arbitration in accordance with the rules of the ADR Institute of Canada and the United Nations Commission on International Trade Law (UNCITRAL) Arbitration Rules. The arbitration shall take place in Ontario, Canada. The arbitration shall be conducted by a single arbitrator. The decision of the arbitrator shall be final and binding on both parties. Either party may seek enforcement of the arbitration decision in any court of competent jurisdiction.
 
 ### 14. Governing Law and Jurisdiction
 
@@ -94,7 +108,7 @@ Any notices required or permitted under this Agreement shall be in writing and w
 
 ### 16. Assignment of Rights
 
-{{COMPANY_NAME}} may assign its rights under this Agreement to any party that assumes {{COMPANY_NAME}}'s obligations hereunder. You may not assign your rights or obligations under this Agreement without {{COMPANY_NAME}}'s prior written consent.
+{{COMPANY_NAME}} may assign its rights under this Agreement to any party that assumes {{COMPANY_NAME}}'s obligations hereunder. {{COMPANY_NAME}} will notify you of any such assignment. You may not assign your rights or obligations under this Agreement without {{COMPANY_NAME}}'s prior written consent.
 
 ### 17. Severability
 
