@@ -1,4 +1,17 @@
-# Simplified CLA Clauses
+# Simplified Contributor License Agreement (CLA)
+
+## Preamble
+
+IMPORTANT: This simplified version is NOT a legal document. It is provided solely to help you understand the main points of the full Contributor License Agreement (CLA). 
+
+- This simplified version does not replace the full CLA.
+- You MUST review and agree to the original, full CLA document before contributing to the project.
+- We strongly recommend that you seek legal counsel to fully understand your rights and obligations under the CLA.
+- If there are any discrepancies between this simplified version and the full CLA, the full CLA always takes precedence.
+
+We've created this simplified version because we want to ensure that you understand the key points of the agreement you're entering into. However, your legal rights and obligations are determined by the full CLA, not this simplified version.
+
+## Glossary
 
 Throughout this agreement, you might come across some terms that aren't common in everyday language. Here's what they mean:
 
