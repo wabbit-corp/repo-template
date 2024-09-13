@@ -32,13 +32,15 @@ You consent to the use of your name, username, and any other identifying informa
 
 Should you wish to submit work that is not your original creation, you may submit it to {{COMPANY_NAME}} separately from any Contribution, identifying the complete details of its source and of any license or other restriction (including, but not limited to, related patents, trademarks, and license agreements) of which you are personally aware, and conspicuously marking the work as "Submitted on behalf of a third party: [named here]," ensuring you have proper authorization from the original authors or rights holders.
 
+You agree not to submit any materials that you know or reasonably should know include any unauthorized third-party intellectual property. {{COMPANY_NAME}} reserves the right to reject or remove any Contributions that it believes may infringe on third-party rights.
+
 ### 5. Retention of Rights
 
 You accept and agree to the following terms and conditions for your present and future Contributions submitted to {{COMPANY_NAME}}. Except for the rights and licenses granted herein to {{COMPANY_NAME}} and recipients of software distributed by {{COMPANY_NAME}}, You reserve any remaining right, title, and interest in and to your Contributions. This retention does not affect the comprehensive rights granted to {{COMPANY_NAME}} as outlined in Sections 2 and 3.
 
 ### 6. Licensing Terms
 
-By submitting Contributions, you understand and agree that {{COMPANY_NAME}} may license your Contributions under any terms, including open-source licenses such as AGPL-3.0, proprietary licenses, and commercial licenses, at {{COMPANY_NAME}}'s discretion. {{COMPANY_NAME}} commits to always making the Project available under an open-source license, though the specific license may change.
+By submitting Contributions, you understand and agree that {{COMPANY_NAME}} may license your Contributions under any terms, including open-source licenses such as AGPL-3.0, proprietary licenses, and commercial licenses, at {{COMPANY_NAME}}'s discretion. This means your Contributions may be included in versions of the Project that are distributed under licenses different from the one under which you originally contributed, including proprietary versions. {{COMPANY_NAME}} currently commits to making the Project available under an open-source license, though the specific license may change. However, {{COMPANY_NAME}} reserves the right to alter this commitment in the future, while honoring the terms under which previous Contributions were made.
 
 ### 7. Consideration
 
@@ -60,7 +62,7 @@ You represent that you are of legal age to form a binding contract in your juris
 
 To the extent permitted by applicable law, you agree to indemnify and hold harmless {{COMPANY_NAME}}, its officers, directors, and agents, against any claim arising from your breach of the representations and warranties in this Agreement. This indemnification obligation shall be limited to actual damages incurred by {{COMPANY_NAME}}, and in no event shall your total liability exceed the actual damages incurred by {{COMPANY_NAME}} as a direct result of your breach.
 
-CONTRIBUTIONS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. IN NO EVENT SHALL YOU BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH YOUR CONTRIBUTIONS OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTIONS.
+CONTRIBUTIONS ARE PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND. TO THE EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL YOU BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH YOUR CONTRIBUTIONS OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTIONS.
 
 ### 10.1 Disclaimer of Warranties and Limitation of Liability
 
