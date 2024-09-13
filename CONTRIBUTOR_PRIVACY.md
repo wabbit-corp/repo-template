@@ -16,6 +16,15 @@ We may collect the following types of information from contributors:
 - Contribution history
 - Any other information you provide in your contributions or communications with us
 
+## 2.1 Legal Bases for Processing
+
+We process your personal information based on the following legal grounds:
+
+* Consent: When you provide it voluntarily.
+* Contractual Necessity: To fulfill our obligations under the Contributor License Agreement.
+* Legal Obligation: To comply with legal requirements.
+* Legitimate Interests: For our legitimate interests in managing and improving our projects, provided these do not override your rights.
+
 ## 3. How We Use Your Information
 
 We use your information for the following purposes:
@@ -39,18 +48,22 @@ We will not sell your personal information to third parties.
 
 ## 5. Data Retention
 
-We retain your information for as long as necessary to fulfill the purposes outlined in this policy, unless a longer retention period is required by law.
+We retain your information for as long as necessary to fulfill the purposes outlined in this policy, including to comply with legal obligations, resolve disputes, and enforce our agreements. When determining retention periods, we consider the amount, nature, and sensitivity of the personal data, the potential risk of harm from unauthorized use or disclosure, and the applicable legal requirements.
 
 ## 6. Your Rights
 
 Depending on your jurisdiction, you may have the right to:
 
-- Access the personal information we hold about you
-- Correct inaccurate information
-- Request deletion of your information
-- Object to or restrict certain processing activities
+* Access the personal information we hold about you.
+* Correct inaccurate information.
+* Request deletion of your information.
+* Object to or restrict certain processing activities.
+* Data portability.
+* Withdraw consent at any time without affecting the lawfulness of processing based on consent before its withdrawal.
 
-To exercise these rights, please contact us at {{COMPANY_EMAIL}}.
+To exercise these rights, please contact us at {{COMPANY_EMAIL}} with the subject line 'Data Subject Rights Request'. We will acknowledge receipt of your request within 10 business days and respond within the timeframes required by applicable law.
+
+You also have the right to lodge a complaint with a data protection supervisory authority in your country if you believe that our processing of your personal information violates applicable law.
 
 ## 7. Security
 
@@ -58,11 +71,11 @@ We implement reasonable security measures to protect your information. However, 
 
 ## 8. Children's Privacy
 
-Our open-source projects are not directed at children under 13. If you are under 13, please do not contribute or provide any personal information.
+Our open-source projects are not directed at children under the age of 16 (or the age of majority in your jurisdiction). If you are under 16, please do not contribute or provide any personal information without verifiable parental consent.
 
 ## 9. International Data Transfers
 
-Your information may be transferred to and processed in countries other than your own. By contributing, you consent to these transfers.
+Your information may be transferred to and processed in countries other than your own. Where required by applicable law, we implement appropriate safeguards, such as Standard Contractual Clauses approved by relevant authorities, to protect your personal data during international transfers. By contributing, you consent to these transfers and the implementation of such safeguards.
 
 ## 10. Changes to This Policy
 
@@ -75,3 +88,17 @@ If you have any questions about this policy or our privacy practices, please con
 ## 12. Consent
 
 By contributing to our projects, you consent to the collection, use, and sharing of your information as described in this policy.
+
+## 13. Cookies and Tracking Technologies
+
+We may use cookies and similar tracking technologies to enhance your experience on our websites. For detailed information on the cookies we use and your choices regarding cookies, please refer to our Cookie Policy [insert link].
+
+## 14. California Privacy Rights
+
+If you are a California resident, you have certain rights under the California Consumer Privacy Act (CCPA), including:
+
+* The right to know what personal information we collect about you.
+* The right to request deletion of your personal information.
+* The right to opt-out of the sale of your personal information.
+
+To exercise these rights, please contact us at {{COMPANY_EMAIL}}.
