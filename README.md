@@ -62,9 +62,3 @@ For commercial use, please contact Wabbit Consulting Corporation (at wabbit@wabb
 ## Contributing
 
 Before we can accept your contributions, we kindly ask you to agree to our Contributor License Agreement (CLA).
-
-<a href="https://github.com/RichardLitt/standard-readme/graphs/contributors"><img src="https://opencollective.com/standard-readme/contributors.svg?width=890&button=false" /></a>
- |
-| __Source Info__ |  |
-| __Contributors__ |  |
-| __Support__ | [![GitHub Sponsors](https://img.shields.io/badge/sponsor-30363D?logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/cicirello) [![Liberapay](https://img.shields.io/badge/Liberapay-F6C915?logo=liberapay&logoColor=black)](https://liberapay.com/cicirello) [![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?logo=ko-fi&logoColor=white)](https://ko-fi.com/cicirello) |
