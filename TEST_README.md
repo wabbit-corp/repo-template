@@ -1,4 +1,4 @@
-![](../my_banner.png)
+![](./my_banner.png)
 
 <center>
 
