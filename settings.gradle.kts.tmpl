@@ -1,0 +1,30 @@
+{#
+settings.gradle.kts is used to configure the settings for the Gradle project itself.
+This includes things like the project name, the directory structure of the project,
+and any Gradle plugins that the project uses. This file is located in the root
+directory of the project and is typically used to configure settings that apply
+to all the subprojects within the project.
+
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
+}
+#}
+rootProject.name = "one.wabbit"
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        maven("https://papermc.io/repo/repository/maven-public/")
+    }
+}
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven("https://papermc.io/repo/repository/maven-public/")
+    }
+}
+
+{% for subproject in subprojects -%}
+include(":{{ subproject }}")
+{% endfor %}
