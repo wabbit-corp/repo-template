@@ -1,8 +1,8 @@
 ![](./my_banner.png)
 
 <p align=center>
-    <a href="https://jitpack.io/v/wabbit-corp/kotlin-data-need/month.svg"><img src="https://jitpack.io/v/wabbit-corp/kotlin-data-need.svg" alt="Release"></a>
-    <a href="https://jitpack.io/v/wabbit-corp/kotlin-data-need/month.svg"><img src="https://jitpack.io/v/wabbit-corp/kotlin-data-need/month.svg" alt="Monthly download statistics"></a>
+    <a href="https://jitpack.io/#wabbit-corp/kotlin-data-need/"><img src="https://jitpack.io/v/wabbit-corp/kotlin-data-need.svg" alt="Release"></a>
+    <a href="https://jitpack.io/#wabbit-corp/kotlin-data-need/"><img src="https://jitpack.io/v/wabbit-corp/kotlin-data-need/month.svg" alt="Monthly download statistics"></a>
 </p>
 
 <p align=center>
@@ -55,10 +55,10 @@ dependencies {
 
 ## Licensing
 
-This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0) for open source use.
+This project is licensed under the [GNU Affero General Public License v3.0 (AGPL-3.0)](https://github.com/wabbit-corp/kotlin-data-need/blob/main/LICENSE.md) for open source use.
 
 For commercial use, please contact Wabbit Consulting Corporation (at wabbit@wabbit.one) for licensing terms.
 
 ## Contributing
 
-Before we can accept your contributions, we kindly ask you to agree to our Contributor License Agreement (CLA).
+Before we can accept your contributions, we kindly ask you to agree to our [Contributor License Agreement (CLA)](CLA.md).
