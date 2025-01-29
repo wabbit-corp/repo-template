@@ -1,13 +1,14 @@
 ![](./my_banner.png)
 
-<center>
+<p align=center>
+    <a href="https://jitpack.io/v/wabbit-corp/kotlin-data-need/month.svg"><img src="https://jitpack.io/v/wabbit-corp/kotlin-data-need.svg" alt="Release"></a>
+    <a href="https://jitpack.io/v/wabbit-corp/kotlin-data-need/month.svg"><img src="https://jitpack.io/v/wabbit-corp/kotlin-data-need/month.svg" alt="Monthly download statistics"></a>
+</p>
 
-![Release](https://jitpack.io/v/wabbit-corp/kotlin-data-need.svg)
-![Monthly download statistics](https://jitpack.io/v/wabbit-corp/kotlin-data-need/month.svg)
-
-[![License](https://img.shields.io/github/license/wabbit-corp/kotlin-data-need)](https://github.com/wabbit-corp/kotlin-data-need/blob/main/LICENSE.md) [![GitHub top language](https://img.shields.io/github/languages/top/wabbit-corp/kotlin-data-need)](https://github.com/wabbit-corp/kotlin-data-need)
-
-</center>
+<p align=center>
+    <a href="https://github.com/wabbit-corp/kotlin-data-need/blob/main/LICENSE.md"><img src="https://img.shields.io/github/license/wabbit-corp/kotlin-data-need" alt="License"></a>
+    <a href="https://github.com/wabbit-corp/kotlin-data-needs"><img src="https://img.shields.io/github/languages/top/wabbit-corp/kotlin-data-need" alt="GitHub top language"></a>
+</p>
 
 
 The "kotlin-data-need" library offers an elegant solution for deferred computation and caching in Kotlin applications. By allowing computations to be evaluated only when needed and caching the results, it provides performance benefits and flexibility in scenarios where efficiency is paramount. The library facilitates lazy evaluation and memoization through its primary component, the `Need` class, which supports transformations and combinations of computations via functional operations like `map`, `flatMap`, and `zip`.
