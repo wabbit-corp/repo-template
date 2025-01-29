@@ -1,0 +1,80 @@
+{#buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+//        classpath("com.vanniktech:gradle-dependency-graph-generator-plugin:0.8.0")
+//        classpath("name.remal:gradle-plugins:1.9.2")
+        classpath(kotlin("serialization", version = "1.8.0"))
+    }
+}#}
+
+// https://github.com/vanniktech/gradle-dependency-graph-generator-plugin
+//apply(plugin = "com.vanniktech.dependency.graph.generator")
+
+//apply(plugin = "com.faire.gradle.analyze")
+//apply(plugin ="name.remal.check-dependency-updates")
+
+plugins {
+    id("org.jetbrains.kotlin.jvm") version "2.0.20" apply false
+    id("org.jetbrains.kotlin.js") version "2.0.20" apply false
+    id("org.jetbrains.kotlin.multiplatform") version "2.0.20" apply false
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.20" apply false
+    id("com.gradleup.shadow") version "8.3.0" apply false
+    id("io.papermc.paperweight.userdev") version "1.7.2" apply false
+
+    // id("com.github.johnrengelman.shadow") version "8.3.0" apply false
+    // id("net.rdrei.android.buildtimetracker") version "0.11.0" apply true
+    // id("com.faire.gradle.analyze") version "1.0.9" apply true
+    // id("com.autonomousapps.dependency-analysis") version "1.30.0" apply true
+    // id("name.remal.check-dependency-updates") version "1.5.0" apply true
+}
+
+
+{#allprojects {
+    val build = System.getenv("BUILD_NUMBER") ?: "SNAPSHOT"
+    group = "one.wabbit"
+    version = "0.0.1-BETA-$build"
+
+    buildscript {
+        repositories {
+            google()
+            mavenCentral()
+        }
+//        dependencies {
+//            classpath("name.remal:gradle-plugins:1.9.2")
+//        }
+    }
+
+//    apply(plugin ="name.remal.check-dependency-updates")
+}#}
+
+{#subprojects {
+    apply<JavaLibraryPlugin>()
+
+    java {
+        targetCompatibility = JavaVersion.toVersion(21)
+        sourceCompatibility = JavaVersion.toVersion(21)
+    }
+
+    tasks {
+        withType<Test> {
+            jvmArgs("-ea")
+        }
+
+        withType<JavaCompile> {
+            options.encoding = Charsets.UTF_8.name()
+        }
+        withType<Javadoc> {
+            options.encoding = Charsets.UTF_8.name()
+        }
+
+        withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+            // . . .
+            // kotlinOptions.languageVersion = "1.9"
+            kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
+            kotlinOptions.jvmTarget = "21"
+        }
+    }
+}#}
