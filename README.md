@@ -10,6 +10,7 @@
     <a href="https://github.com/wabbit-corp/kotlin-data-needs"><img src="https://img.shields.io/github/languages/top/wabbit-corp/kotlin-data-need" alt="GitHub top language"></a>
 </p>
 
+---
 
 The "kotlin-data-need" library offers an elegant solution for deferred computation and caching in Kotlin applications. By allowing computations to be evaluated only when needed and caching the results, it provides performance benefits and flexibility in scenarios where efficiency is paramount. The library facilitates lazy evaluation and memoization through its primary component, the `Need` class, which supports transformations and combinations of computations via functional operations like `map`, `flatMap`, and `zip`.
 
