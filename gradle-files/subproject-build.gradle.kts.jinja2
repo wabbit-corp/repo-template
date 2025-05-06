@@ -1,0 +1,170 @@
+{% if 'kotlin' in features %}
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+{% endif %}
+
+repositories {
+    mavenCentral()
+    {% for repo in repositories %}
+    maven("{{ repo.url }}")
+    {%- endfor %}
+    {% if mode == 'prod' %}
+    maven("https://jitpack.io")
+    {%- elif mode == 'dev' %}
+    mavenLocal()
+    {%- endif %}
+}
+
+group   = "{{ project_group }}"
+version = "{{ project_version }}"
+
+plugins {
+    {% if 'shadow-jar' in features %}id("com.gradleup.shadow") version "{{ shadow_version }}"{% endif %}
+    {% if 'jvm-kotlin-application' in features %}application{% endif %}
+    {% if 'kotlin' in features %}
+    kotlin("jvm") version "{{ kotlin_version }}"
+    {% endif %}
+    {% if 'scala' in features %}scala{% endif %}
+    {% if 'kotlin-serialization' in features %}kotlin("plugin.serialization") version "{{ kotlin_version }}"{% endif %}
+    {% if 'paper-plugin' in features %}
+    id("io.papermc.paperweight.userdev") version "1.7.2"
+    id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
+    {% endif %}
+
+    id("maven-publish")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "{{ project_group }}"
+            artifactId = "{{ project_name }}"
+            version = "{{ project_version }}"
+            from(components["java"])
+        }
+    }
+}
+
+dependencies {
+    {% for lib in project_dependencies %}
+    {{ lib }}
+    {%- endfor %}
+
+    {% if 'paper-plugin' in features -%}
+        paperweight.paperDevBundle("1.21.1-R0.1-SNAPSHOT")
+    {%- endif %}
+    {% if 'kotlin' in features -%}
+        testImplementation(kotlin("test"))
+    {%- endif %}
+    {% if 'scala' in features -%}
+    implementation("org.scala-lang:scala3-library_3:3.6.4")
+
+    testImplementation("org.scalatest:scalatest_2.13:3.2.19")
+    testRuntimeOnly("org.junit.platform:junit-platform-engine:1.10.0")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.10.0")
+    testRuntimeOnly("org.scalatestplus:junit-5-10_2.13:3.2.19.0")
+    {%- endif %}
+    {% if 'kotlin-serialization' in features -%}
+        implementation("{{ serialization_library }}")
+    {%- endif %}
+
+    {% for lib in other_dependencies %}
+    {{ lib }}
+    {%- endfor %}
+}
+
+java {
+    targetCompatibility = JavaVersion.toVersion(21)
+    sourceCompatibility = JavaVersion.toVersion(21)
+}
+
+tasks {
+    withType<Test> {
+        jvmArgs("-ea")
+        {% if 'scala' in features %}
+        useJUnitPlatform {
+            includeEngines("scalatest")
+            testLogging {
+                events("passed", "skipped", "failed")
+            }
+        }
+        {% endif %}
+    }
+    withType<JavaCompile> {
+        options.encoding = Charsets.UTF_8.name()
+    }
+    withType<Javadoc> {
+        options.encoding = Charsets.UTF_8.name()
+    }
+    {% if 'kotlin' in features %}
+    withType<KotlinCompile> {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
+            freeCompilerArgs.add("-Xcontext-receivers")
+        }
+    }
+    {% endif %}
+
+    {% if 'paper-plugin' in features %}
+    reobfJar {
+        jvmArgs.set(listOf("-Xmx4G"))
+    }
+    build {
+        dependsOn(reobfJar)
+    }
+    jar {
+        manifest {
+            attributes["Add-Opens"] = "java.base/java.util java.base/java.io java.base/java.nio java.base/java.lang java.base/java.lang.invoke java.base/sun.security.util java.base/sun.security.action"
+        }
+    }
+    {% endif %}
+
+    jar {
+        setProperty("zip64", true)
+        {% if 'jvm-kotlin-agent' in features %}
+        manifest {
+            attributes(
+                "Premain-Class" to "{{ features['jvm-kotlin-agent'].main }}",
+                "Can-Redefine-Classes" to "true",
+                "Can-Retransform-Classes" to "true",
+                "Implementation-Version" to "${project.version}"
+            )
+        }
+        {% endif %}
+    }
+
+    {% if 'jvm-kotlin-application' in features %}
+    application {
+        mainClass.set("{{ features['jvm-kotlin-application'].main }}")
+    }
+    {% endif %}
+
+    {% if 'shadow-jar' in features %}
+    {% if 'jvm-kotlin-application' in features %}
+    startShadowScripts {
+        dependsOn(jar)
+    }
+    {% endif %}
+    shadowJar {
+        {% if features['shadow-jar'].jarName %}
+        archiveFileName.set("{{ features['shadow-jar'].jarName }}")
+        {% endif %}
+
+        setProperty("zip64", true)
+
+        // from(rootProject.projectDir.resolve("LICENSE"))
+        // listOf(
+        //     "org.slf4j"
+        // ).forEach { relocate(it, "cc.shaded.$it") }
+    }
+    {% endif %}
+}
+
+{% if 'paper-plugin' in features %}
+bukkit {
+    main = "{{ features['paper-plugin'].main }}"
+    name = "{{ features['paper-plugin'].name }}"
+    apiVersion = "{{ features['paper-plugin'].apiVersion }}"
+    depend = listOf()
+}
+{% endif %}
