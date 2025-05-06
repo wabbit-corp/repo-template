@@ -27,7 +27,7 @@ You hereby grant to {{company_name}} and to recipients of software distributed b
 You represent that you are legally entitled to grant the above license. If your employer(s) has rights to intellectual property that you create that includes your Contributions, you represent that you have received permission to make Contributions on behalf of that employer, or that your employer has waived such rights for your Contributions to {{company_name}}.
 
 #### 3.2 Original Work
-You represent that each of your Contributions is your original creation. 
+You represent that each of your Contributions is your original creation.
 
 #### 3.3 Third-Party Rights
 You represent that your Contribution submissions include complete details of any third-party license or other restriction (including, but not limited to, related patents and trademarks) of which you are personally aware and which are associated with any part of your Contributions.
@@ -123,7 +123,7 @@ This Agreement does not create any third-party beneficiary rights in any individ
 
 ### 20. Force Majeure
 
-Neither party shall be liable for any failure or delay in performing their obligations under this Agreement to the extent that such failure or delay is caused by circumstances beyond their reasonable control, including but not limited to acts of God, natural disasters, war, civil unrest, terrorism, labor disputes, government actions, power failures, or internet disturbances ("Force Majeure Event"). 
+Neither party shall be liable for any failure or delay in performing their obligations under this Agreement to the extent that such failure or delay is caused by circumstances beyond their reasonable control, including but not limited to acts of God, natural disasters, war, civil unrest, terrorism, labor disputes, government actions, power failures, or internet disturbances ("Force Majeure Event").
 
 The party affected by a Force Majeure Event shall:
 (a) Promptly notify the other party in writing of the nature and extent of the Force Majeure Event;

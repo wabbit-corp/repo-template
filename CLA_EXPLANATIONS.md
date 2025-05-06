@@ -2,7 +2,7 @@
 
 ## Preamble
 
-IMPORTANT: This simplified version is NOT a legal document. It is provided solely to help you understand the main points of the full Contributor License Agreement (CLA). 
+IMPORTANT: This simplified version is NOT a legal document. It is provided solely to help you understand the main points of the full Contributor License Agreement (CLA).
 
 - This simplified version does not replace the full CLA.
 - You MUST review and agree to the original, full CLA document before contributing to the project.
