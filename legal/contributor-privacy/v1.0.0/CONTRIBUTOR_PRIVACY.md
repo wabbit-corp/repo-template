@@ -1,10 +1,10 @@
-# Contributor Privacy Policy
+# Contributor Privacy Policy v1.0.0
 
-Last Updated: [Insert Date]
+Last Updated: 2025-05-06
 
 ## 1. Introduction
 
-{{COMPANY_FULL_NAME}} ("{{COMPANY_NAME}}", "we", "us", or "our") is committed to protecting the privacy of our contributors. This Contributor Privacy Policy explains how we collect, use, and safeguard your personal information when you contribute to our open-source projects.
+Wabbit Consulting Corporation ("Wabbit Corporation", "we", "us", or "our") is committed to protecting the privacy of our contributors. This Contributor Privacy Policy explains how we collect, use, and safeguard your personal information when you contribute to our open-source projects.
 
 ## 2. Information We Collect
 
@@ -61,7 +61,7 @@ Depending on your jurisdiction, you may have the right to:
 * Data portability.
 * Withdraw consent at any time without affecting the lawfulness of processing based on consent before its withdrawal.
 
-To exercise these rights, please contact us at {{COMPANY_EMAIL}} with the subject line 'Data Subject Rights Request'. We will acknowledge receipt of your request within 10 business days and respond within the timeframes required by applicable law.
+To exercise these rights, please contact us at wabbit@wabbit.one with the subject line 'Data Subject Rights Request'. We will acknowledge receipt of your request within 10 business days and respond within the timeframes required by applicable law.
 
 You also have the right to lodge a complaint with a data protection supervisory authority in your country if you believe that our processing of your personal information violates applicable law.
 
@@ -101,4 +101,4 @@ If you are a California resident, you have certain rights under the California C
 * The right to request deletion of your personal information.
 * The right to opt-out of the sale of your personal information.
 
-To exercise these rights, please contact us at {{COMPANY_EMAIL}}.
+To exercise these rights, please contact us at wabbit@wabbit.one.

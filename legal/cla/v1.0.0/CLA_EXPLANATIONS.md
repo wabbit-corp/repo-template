@@ -1,4 +1,4 @@
-# Simplified Contributor License Agreement (CLA)
+# Simplified Contributor License Agreement (CLA) v1.0.0
 
 ## Preamble
 

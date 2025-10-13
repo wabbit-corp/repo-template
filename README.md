@@ -18,7 +18,7 @@
 {{usage-at-a-glance}}
 ```
 
-## 🚀  Installation
+## 🚀 Installation
 
 Add the following dependency to your project:
 
@@ -65,7 +65,7 @@ libraryDependencies += "com.github.{{github-org}}" % "{{github-repo}}" % "{{proj
 
 
 
-## 🚀  Usage
+## 🚀 Usage
 
 {{usage-information}}
 
@@ -77,4 +77,4 @@ For commercial use, please contact Wabbit Consulting Corporation (at wabbit@wabb
 
 ## Contributing
 
-Before we can accept your contributions, we kindly ask you to agree to our [Contributor License Agreement (CLA)](CLA.md).
+Before we can accept your contributions, we kindly ask you to agree to our [Contributor License Agreement (CLA)](legal/cla/v1.0.0/CLA.md).
