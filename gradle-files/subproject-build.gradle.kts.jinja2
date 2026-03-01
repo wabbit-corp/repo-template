@@ -33,6 +33,10 @@ plugins {
     id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
     {% endif %}
 
+    {% if 'intellij-plugin' in features %}
+    id("org.jetbrains.intellij") version "1.17.2"
+    {% endif %}
+
     id("maven-publish")
 }
 
@@ -76,8 +80,8 @@ dependencies {
 }
 
 java {
-    targetCompatibility = JavaVersion.toVersion(21)
-    sourceCompatibility = JavaVersion.toVersion(21)
+    targetCompatibility = JavaVersion.toVersion({{ java_version }})
+    sourceCompatibility = JavaVersion.toVersion({{ java_version }})
 }
 
 tasks {
@@ -101,7 +105,7 @@ tasks {
     {% if 'kotlin' in features %}
     withType<KotlinCompile> {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
+            jvmTarget.set(JvmTarget.{{ kotlin_jvm_target }})
             freeCompilerArgs.add("-Xcontext-receivers")
         }
     }
@@ -160,7 +164,21 @@ tasks {
         // ).forEach { relocate(it, "cc.shaded.$it") }
     }
     {% endif %}
+
+    {% if 'intellij-plugin' in features %}
+    patchPluginXml {
+        sinceBuild.set("224")
+        untilBuild.set("255.*")
+    }
+    {% endif %}
 }
+
+{% if 'intellij-plugin' in features %}
+intellij {
+    version.set("2023.2")
+    plugins.set(listOf("com.intellij.java"))
+}
+{% endif %}
 
 {% if 'paper-plugin' in features %}
 bukkit {
