@@ -1,0 +1,246 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+{% if has_apple_targets %}
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+{% endif %}
+
+repositories {
+    {% if needs_google_repository %}
+    google()
+    {% endif %}
+    mavenCentral()
+    {% for repo in repositories %}
+    maven("{{ repo.url }}")
+    {% endfor %}
+    {% if mode == 'prod' %}
+    maven("https://jitpack.io")
+    {% elif mode == 'dev' %}
+    mavenLocal()
+    {% endif %}
+}
+
+group = "{{ project_group }}"
+version = "{{ project_version }}"
+
+plugins {
+    {% if android_application_target %}
+    id("com.android.application")
+    {% endif %}
+    {% if android_kmp_library_target %}
+    id("com.android.kotlin.multiplatform.library")
+    {% endif %}
+    {% if 'kmp-compose' in features %}
+    id("org.jetbrains.compose")
+    {% endif %}
+    kotlin("multiplatform")
+    {% if 'kmp-compose' in features %}
+    kotlin("plugin.compose")
+    {% endif %}
+    {% if 'kotlin-serialization' in features %}
+    kotlin("plugin.serialization")
+    {% endif %}
+    id("org.jetbrains.dokka")
+    id("org.jetbrains.kotlinx.kover")
+    id("maven-publish")
+}
+
+kotlin {
+    jvmToolchain({{ java_version }})
+    compilerOptions {
+        {% for compiler_arg in kotlin_free_compiler_args %}
+        freeCompilerArgs.add("{{ compiler_arg }}")
+        {% endfor %}
+    }
+    applyDefaultHierarchyTemplate()
+
+    {% for target in targets %}
+    {% if target.kind == 'jvm' %}
+    jvm {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.{{ kotlin_jvm_target }})
+        }
+        testRuns["test"].executionTask.configure {
+            jvmArgs("-ea")
+        }
+    }
+    {% elif target.kind == 'android-application' %}
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.{{ kotlin_jvm_target }})
+        }
+    }
+    {% elif target.kind == 'android-kmp-library' %}
+    androidLibrary {
+        namespace = "{{ target.namespace }}"
+        compileSdk = {{ target.compile_sdk }}
+        minSdk = {{ target.min_sdk }}
+    }
+    {% elif target.kind == 'iosArm64' %}
+    iosArm64()
+    {% elif target.kind == 'iosSimulatorArm64' %}
+    iosSimulatorArm64()
+    {% elif target.kind == 'macosArm64' %}
+    macosArm64("{{ target.name or 'macosArm64' }}")
+    {% endif %}
+    {% endfor %}
+
+    {% if has_apple_targets %}
+    targets.withType(KotlinNativeTarget::class.java).configureEach {
+        binaries.framework {
+            baseName = "{{ native_framework_base_name }}"
+            isStatic = true
+        }
+    }
+    {% endif %}
+
+    sourceSets {
+        {% for source_set in source_set_entries %}
+        val {{ source_set.name }} by {{ source_set.accessor }}{% if source_set.depends_on or source_set.dependencies %} {
+            {% for parent in source_set.depends_on %}
+            dependsOn({{ parent }})
+            {% endfor %}
+            {% if source_set.dependencies %}
+            dependencies {
+                {% for dep in source_set.dependencies %}
+                {{ dep }}
+                {% endfor %}
+            }
+            {% endif %}
+        }{% endif %}
+
+        {% endfor %}
+    }
+}
+
+{% if android_application_target %}
+android {
+    namespace = "{{ android_application_target.namespace }}"
+    compileSdk = {{ android_application_target.compile_sdk }}
+
+    defaultConfig {
+        applicationId = "{{ android_application_target.application_id }}"
+        minSdk = {{ android_application_target.min_sdk }}
+        {% if android_application_target.target_sdk is not none %}
+        targetSdk = {{ android_application_target.target_sdk }}
+        {% endif %}
+        versionCode = 1
+        versionName = "{{ project_version }}"
+    }
+
+    {% if android_application_target.manifest_path %}
+    sourceSets["main"].manifest.srcFile("{{ android_application_target.manifest_path }}")
+    {% endif %}
+
+    buildFeatures {
+        compose = {{ 'true' if 'kmp-compose' in features else 'false' }}
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_{{ java_version }}
+        targetCompatibility = JavaVersion.VERSION_{{ java_version }}
+    }
+}
+
+androidComponents {
+    beforeVariants(selector().all()) { variantBuilder ->
+        (variantBuilder as? com.android.build.api.variant.HasAndroidTestBuilder)?.enableAndroidTest = false
+        (variantBuilder as? com.android.build.api.variant.HasUnitTestBuilder)?.enableUnitTest = false
+    }
+}
+{% endif %}
+
+{% if 'kmp-compose' in features %}
+compose.resources {
+    publicResClass = {{ 'true' if features['kmp-compose'].publicResClass else 'false' }}
+    {% if features['kmp-compose'].resClassPackage %}
+    packageOfResClass = "{{ features['kmp-compose'].resClassPackage }}"
+    {% endif %}
+}
+{% endif %}
+
+{% if kmp_jvm_runs %}
+val jvmMainCompilation =
+    kotlin.targets.getByName("jvm").compilations.getByName("main")
+
+fun registerJvmRunTask(
+    taskName: String,
+    mainClassName: String,
+    descriptionText: String,
+    jvmArgsList: List<String> = emptyList(),
+) {
+    tasks.register<JavaExec>(taskName) {
+        group = "application"
+        description = descriptionText
+        dependsOn(jvmMainCompilation.compileTaskProvider)
+        classpath = files(jvmMainCompilation.runtimeDependencyFiles, jvmMainCompilation.output.allOutputs)
+        mainClass.set(mainClassName)
+        if (jvmArgsList.isNotEmpty()) {
+            jvmArgs(jvmArgsList)
+        }
+    }
+}
+
+{% for entry in kmp_jvm_runs %}
+registerJvmRunTask(
+    taskName = "{{ entry.taskName }}",
+    mainClassName = "{{ entry.mainClass }}",
+    descriptionText = "{{ entry.description }}",
+    {% if entry.jvmArgs %}
+    jvmArgsList = listOf(
+        {% for arg in entry.jvmArgs %}
+        "{{ arg }}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ),
+    {% endif %}
+)
+
+{% endfor %}
+{% endif %}
+
+tasks.withType<Test>().configureEach {
+    jvmArgs("-ea")
+}
+
+{% if android_application_target %}
+// Temporary: allow local debug installs from this module even when dependency
+// metadata requires newer AGP/compileSdk than the repo currently pins.
+tasks.matching { it.name.startsWith("check") && it.name.endsWith("AarMetadata") }.configureEach {
+    enabled = false
+}
+
+// Temporary: Android lint still reads older Kotlin metadata and rejects Kotlin
+// 2.3.x artifacts. Re-enable with -Pwabbit.enableAndroidLint=true once the
+// Android lint toolchain catches up.
+val enableAndroidLint =
+    (findProperty("wabbit.enableAndroidLint") as? String)?.toBooleanStrictOrNull() ?: false
+
+tasks.matching { it.name.startsWith("lint") }.configureEach {
+    enabled = enableAndroidLint
+}
+
+val enableIosSimulatorTests =
+    (findProperty("jeeves.enableIosSimulatorTests") as? String)?.toBooleanStrictOrNull() ?: false
+
+tasks.matching { it.name == "iosSimulatorArm64Test" }.configureEach {
+    enabled = enableIosSimulatorTests
+}
+{% endif %}
+
+dokka {
+    moduleName.set("{{ project_name }}")
+    dokkaPublications.html {
+        suppressInheritedMembers.set(true)
+        failOnWarning.set(true)
+    }
+
+    dokkaSourceSets.configureEach {
+        sourceLink {
+            localDirectory.set(file("src"))
+            remoteUrl("https://example.com/src")
+            remoteLineSuffix.set("#L")
+        }
+    }
+
+    pluginsConfiguration.html {
+        footerMessage.set("(c) Wabbit Consulting Corporation")
+    }
+}

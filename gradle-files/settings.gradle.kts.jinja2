@@ -1,7 +1,8 @@
-rootProject.name = "one.wabbit"
+rootProject.name = "{{ root_project_name or 'one.wabbit' }}"
 
 dependencyResolutionManagement {
     repositories {
+        google()
         mavenCentral()
         maven("https://repo.papermc.io/repository/maven-public/")
     }
@@ -9,11 +10,36 @@ dependencyResolutionManagement {
 
 pluginManagement {
     repositories {
+        google()
         gradlePluginPortal()
         maven("https://repo.papermc.io/repository/maven-public/")
     }
+    plugins {
+        id("org.jetbrains.kotlin.jvm") version "{{ kotlin_jvm_version }}"
+        id("org.jetbrains.kotlin.js") version "{{ kotlin_js_version }}"
+        id("org.jetbrains.kotlin.multiplatform") version "{{ kotlin_mp_version }}"
+        id("org.jetbrains.kotlin.plugin.serialization") version "{{ kotlin_serialization_version }}"
+        id("org.jetbrains.kotlin.plugin.compose") version "{{ kotlin_mp_version }}"
+        id("com.android.application") version "{{ android_gradle_version }}"
+        id("com.android.library") version "{{ android_gradle_version }}"
+        id("com.android.kotlin.multiplatform.library") version "{{ android_gradle_version }}"
+        id("org.jetbrains.compose") version "{{ compose_plugin_version }}"
+        id("com.gradleup.shadow") version "{{ shadow_version }}"
+        id("org.jetbrains.dokka") version "{{ dokka_version }}"
+        id("org.jetbrains.kotlinx.kover") version "{{ kover_version }}"
+        id("org.jetbrains.intellij") version "{{ intellij_gradle_plugin_version }}"
+        id("io.papermc.paperweight.userdev") version "{{ paperweight_userdev_plugin_version }}"
+        id("net.minecrell.plugin-yml.bukkit") version "{{ bukkit_plugin_yml_version }}"
+    }
 }
 
+{% if included_projects is defined -%}
+{% for included_project in included_projects -%}
+include(":{{ included_project.gradle_project_name }}")
+project(":{{ included_project.gradle_project_name }}").projectDir = file("{{ included_project.project_dir }}")
+{% endfor -%}
+{% elif subprojects is defined -%}
 {% for subproject in subprojects -%}
 include(":{{ subproject }}")
 {% endfor -%}
+{% endif -%}

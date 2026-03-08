@@ -19,22 +19,22 @@ group   = "{{ project_group }}"
 version = "{{ project_version }}"
 
 plugins {
-    {% if 'shadow-jar' in features %}id("com.gradleup.shadow") version "{{ shadow_version }}"{% endif %}
+    {% if 'shadow-jar' in features %}id("com.gradleup.shadow"){% endif %}
     {% if 'jvm-kotlin-application' in features %}application{% endif %}
     {% if 'kotlin' in features %}
-    kotlin("jvm") version "{{ kotlin_version }}"
-    id("org.jetbrains.dokka") version "2.0.0"
-    id("org.jetbrains.kotlinx.kover") version "0.9.1"
+    kotlin("jvm")
+    id("org.jetbrains.dokka")
+    id("org.jetbrains.kotlinx.kover")
     {% endif %}
     {% if 'scala' in features %}scala{% endif %}
-    {% if 'kotlin-serialization' in features %}kotlin("plugin.serialization") version "{{ kotlin_version }}"{% endif %}
+    {% if 'kotlin-serialization' in features %}kotlin("plugin.serialization"){% endif %}
     {% if 'paper-plugin' in features %}
-    id("io.papermc.paperweight.userdev") version "1.7.2"
-    id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
+    id("io.papermc.paperweight.userdev")
+    id("net.minecrell.plugin-yml.bukkit")
     {% endif %}
 
     {% if 'intellij-plugin' in features %}
-    id("org.jetbrains.intellij") version "1.17.2"
+    id("org.jetbrains.intellij")
     {% endif %}
 
     id("maven-publish")
@@ -106,7 +106,9 @@ tasks {
     withType<KotlinCompile> {
         compilerOptions {
             jvmTarget.set(JvmTarget.{{ kotlin_jvm_target }})
-            freeCompilerArgs.add("-Xcontext-receivers")
+            {% for compiler_arg in kotlin_free_compiler_args %}
+            freeCompilerArgs.add("{{ compiler_arg }}")
+            {% endfor %}
         }
     }
     {% endif %}
@@ -167,16 +169,34 @@ tasks {
 
     {% if 'intellij-plugin' in features %}
     patchPluginXml {
-        sinceBuild.set("224")
-        untilBuild.set("255.*")
+        sinceBuild.set("{{ features['intellij-plugin'].sinceBuild or '232' }}")
+        {% if features['intellij-plugin'].untilBuild %}
+        untilBuild.set("{{ features['intellij-plugin'].untilBuild }}")
+        {% endif %}
+    }
+    publishPlugin {
+        token.set(
+            providers.environmentVariable("{{ features['intellij-plugin'].marketplaceTokenEnv or 'JETBRAINS_MARKETPLACE_TOKEN' }}")
+        )
+        channels.set(listOf("{{ features['intellij-plugin'].publishChannel or 'default' }}"))
     }
     {% endif %}
 }
 
 {% if 'intellij-plugin' in features %}
 intellij {
-    version.set("2023.2")
-    plugins.set(listOf("com.intellij.java"))
+    version.set("{{ features['intellij-plugin'].ideaVersion or '2023.2' }}")
+    plugins.set(
+        listOf(
+            {%- if features['intellij-plugin'].bundledPlugins %}
+            {%- for plugin in features['intellij-plugin'].bundledPlugins %}
+            "{{ plugin }}"{% if not loop.last %}, {% endif %}
+            {%- endfor %}
+            {%- else %}
+            "com.intellij.java"
+            {%- endif %}
+        )
+    )
 }
 {% endif %}
 
