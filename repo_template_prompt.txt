@@ -1,5 +1,5 @@
 <notes>
-{{notes}}
+<<notes>>
 </notes>
 
 <readme-template>
@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.wabbit-corp:{{project-id}}:1.0.0")
+    implementation("com.github.wabbit-corp:<<project_id>>:1.0.0")
 }
 ```
 
@@ -33,7 +33,7 @@ dependencies {
 
 This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0) for open source use.
 
-For commercial use, please contact Wabbit Consulting Corporation (at wabbit@wabbit.one) for licensing terms.
+For commercial use, please contact <<company_legal_name>> (at <<legal_contact_email>>) for licensing terms.
 
 ## Contributing
 

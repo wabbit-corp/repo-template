@@ -73,7 +73,7 @@ libraryDependencies += "com.github.{{github-org}}" % "{{github-repo}}" % "{{proj
 
 This project is licensed under the [{{license-type}}](LICENSE.md) for open source use.
 
-For commercial use, please contact Wabbit Consulting Corporation (at wabbit@wabbit.one) for licensing terms.
+For commercial use, please contact {{ company_legal_name }} (at {{ legal_contact_email }}) for licensing terms.
 
 ## Contributing
 

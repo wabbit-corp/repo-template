@@ -237,16 +237,18 @@ dokka {
     }
     dokkaSourceSets.main {
         // includes.from("README.md")
+        {% if has_dokka_source_link %}
         sourceLink {
             localDirectory.set(file("src/main/kotlin"))
-            remoteUrl("https://example.com/src")
+            remoteUrl("{{ dokka_source_link_remote_url }}")
             remoteLineSuffix.set("#L")
         }
+        {% endif %}
     }
     pluginsConfiguration.html {
         // customStyleSheets.from("styles.css")
         // customAssets.from("logo.png")
-        footerMessage.set("(c) Wabbit Consulting Corporation")
+        footerMessage.set("(c) {{ company_legal_name }}")
     }
 }
 {% endif %}

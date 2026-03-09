@@ -4,7 +4,7 @@ Last Updated: 2025-05-06
 
 ## 1. Introduction
 
-Wabbit Consulting Corporation ("Wabbit Corporation", "we", "us", or "our") is committed to protecting the privacy of our contributors. This Contributor Privacy Policy explains how we collect, use, and safeguard your personal information when you contribute to our open-source projects.
+{{ company_legal_name }} ("{{ company_short_name }}", "we", "us", or "our") is committed to protecting the privacy of our contributors. This Contributor Privacy Policy explains how we collect, use, and safeguard your personal information when you contribute to our open-source projects.
 
 ## 2. Information We Collect
 
@@ -61,7 +61,7 @@ Depending on your jurisdiction, you may have the right to:
 * Data portability.
 * Withdraw consent at any time without affecting the lawfulness of processing based on consent before its withdrawal.
 
-To exercise these rights, please contact us at wabbit@wabbit.one with the subject line 'Data Subject Rights Request'. We will acknowledge receipt of your request within 10 business days and respond within the timeframes required by applicable law.
+To exercise these rights, please contact us at {{ legal_contact_email }} with the subject line 'Data Subject Rights Request'. We will acknowledge receipt of your request within 10 business days and respond within the timeframes required by applicable law.
 
 You also have the right to lodge a complaint with a data protection supervisory authority in your country if you believe that our processing of your personal information violates applicable law.
 
@@ -83,7 +83,7 @@ We may update this policy from time to time. We will notify you of any significa
 
 ## 11. Contact Us
 
-If you have any questions about this policy or our privacy practices, please contact us at {{COMPANY_EMAIL}}.
+If you have any questions about this policy or our privacy practices, please contact us at {{ legal_contact_email }}.
 
 ## 12. Consent
 
@@ -91,7 +91,7 @@ By contributing to our projects, you consent to the collection, use, and sharing
 
 ## 13. Cookies and Tracking Technologies
 
-We may use cookies and similar tracking technologies to enhance your experience on our websites. For detailed information on the cookies we use and your choices regarding cookies, please refer to our Cookie Policy [insert link].
+We may use cookies and similar tracking technologies to operate and improve our websites. If we introduce non-essential cookies or similar technologies, we will update this policy before enabling them and will describe the choices available to you. If you have questions about cookies or tracking technologies, please contact us at {{ legal_contact_email }}.
 
 ## 14. California Privacy Rights
 
@@ -101,4 +101,4 @@ If you are a California resident, you have certain rights under the California C
 * The right to request deletion of your personal information.
 * The right to opt-out of the sale of your personal information.
 
-To exercise these rights, please contact us at wabbit@wabbit.one.
+To exercise these rights, please contact us at {{ legal_contact_email }}.

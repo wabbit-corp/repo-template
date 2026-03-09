@@ -233,14 +233,16 @@ dokka {
     }
 
     dokkaSourceSets.configureEach {
+        {% if has_dokka_source_link %}
         sourceLink {
             localDirectory.set(file("src"))
-            remoteUrl("https://example.com/src")
+            remoteUrl("{{ dokka_source_link_remote_url }}")
             remoteLineSuffix.set("#L")
         }
+        {% endif %}
     }
 
     pluginsConfiguration.html {
-        footerMessage.set("(c) Wabbit Consulting Corporation")
+        footerMessage.set("(c) {{ company_legal_name }}")
     }
 }
