@@ -12,3 +12,15 @@ plugins {
     id("org.jetbrains.dokka") version "{{ dokka_version }}" apply false
     id("org.jetbrains.kotlinx.kover") version "{{ kover_version }}" apply false
 }
+
+{% if dependency_substitutions %}
+subprojects {
+    configurations.configureEach {
+        resolutionStrategy.dependencySubstitution {
+            {% for substitution in dependency_substitutions %}
+            substitute(module("{{ substitution.module_coordinate }}")).using(project(":{{ substitution.gradle_project_name }}"))
+            {% endfor %}
+        }
+    }
+}
+{% endif %}

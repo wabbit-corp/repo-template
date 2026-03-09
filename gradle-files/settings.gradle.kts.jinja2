@@ -43,3 +43,8 @@ project(":{{ included_project.gradle_project_name }}").projectDir = file("{{ inc
 include(":{{ subproject }}")
 {% endfor -%}
 {% endif -%}
+
+val localSettingsFile = file("settings.local.gradle.kts")
+if (localSettingsFile.isFile) {
+    apply(from = localSettingsFile)
+}

@@ -8,11 +8,7 @@ repositories {
     {% for repo in repositories %}
     maven("{{ repo.url }}")
     {%- endfor %}
-    {% if mode == 'prod' %}
     maven("https://jitpack.io")
-    {%- elif mode == 'dev' %}
-    mavenLocal()
-    {%- endif %}
 }
 
 group   = "{{ project_group }}"
