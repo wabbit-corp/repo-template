@@ -11,6 +11,7 @@ plugins {
     id("com.gradleup.shadow") version "{{ shadow_version }}" apply false
     id("org.jetbrains.dokka") version "{{ dokka_version }}" apply false
     id("org.jetbrains.kotlinx.kover") version "{{ kover_version }}" apply false
+    id("com.vanniktech.maven.publish") version "{{ maven_publish_plugin_version }}" apply false
 }
 
 {% if dependency_substitutions %}

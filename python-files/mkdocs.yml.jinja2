@@ -1,5 +1,6 @@
 site_name: {{ site_name }}
 site_description: {{ site_description }}
+{% if site_url %}site_url: {{ site_url }}{% endif %}
 {% if repo_url %}repo_url: {{ repo_url }}{% endif %}
 {% if repo_name %}repo_name: {{ repo_name }}{% endif %}
 docs_dir: docs

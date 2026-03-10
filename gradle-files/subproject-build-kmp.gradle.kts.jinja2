@@ -37,7 +37,43 @@ plugins {
     id("org.jetbrains.dokka")
     id("org.jetbrains.kotlinx.kover")
     id("maven-publish")
+    {% if publish_to_maven_central %}
+    id("com.vanniktech.maven.publish")
+    {% endif %}
 }
+
+{% if publish_to_maven_central %}
+mavenPublishing {
+    coordinates("{{ project_group }}", "{{ pom_artifact_id }}", "{{ project_version }}")
+    publishToMavenCentral()
+    signAllPublications()
+    pom {
+        name.set("{{ pom_name }}")
+        description.set("{{ pom_description }}")
+        url.set("{{ pom_url }}")
+        licenses {
+            license {
+                name.set("{{ pom_license_name }}")
+                url.set("{{ pom_license_url }}")
+            }
+        }
+        developers {
+            developer {
+                id.set("{{ pom_developer_id }}")
+                name.set("{{ pom_developer_name }}")
+                {% if pom_developer_email %}
+                email.set("{{ pom_developer_email }}")
+                {% endif %}
+            }
+        }
+        scm {
+            url.set("{{ pom_scm_url }}")
+            connection.set("{{ pom_scm_connection }}")
+            developerConnection.set("{{ pom_scm_developer_connection }}")
+        }
+    }
+}
+{% endif %}
 
 kotlin {
     jvmToolchain({{ java_version }})
@@ -191,6 +227,41 @@ registerJvmRunTask(
 
 {% endfor %}
 {% endif %}
+
+tasks.register("printVersion") {
+    doLast {
+        println(project.version.toString())
+    }
+}
+
+tasks.register("assertReleaseVersion") {
+    doLast {
+        val versionString = project.version.toString()
+        require(!versionString.endsWith("+dev-SNAPSHOT")) {
+            "Release publishing requires a non-snapshot version, got $versionString"
+        }
+        val refType = System.getenv("GITHUB_REF_TYPE") ?: ""
+        val refName = System.getenv("GITHUB_REF_NAME") ?: ""
+        if (refType == "tag" && refName.isNotBlank()) {
+            val expectedTag = "v$versionString"
+            require(refName == expectedTag) {
+                "Git tag $refName does not match project version $versionString"
+            }
+        }
+    }
+}
+
+tasks.register("assertSnapshotVersion") {
+    doLast {
+        val versionString = project.version.toString()
+        require(versionString.endsWith("+dev-SNAPSHOT")) {
+            "Snapshot publishing requires a +dev-SNAPSHOT version, got $versionString"
+        }
+        require((System.getenv("GITHUB_REF_TYPE") ?: "") != "tag") {
+            "Snapshot publishing must not run from a tag ref"
+        }
+    }
+}
 
 tasks.withType<Test>().configureEach {
     jvmArgs("-ea")
