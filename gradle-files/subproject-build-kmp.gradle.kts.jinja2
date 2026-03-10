@@ -305,6 +305,12 @@ dokka {
     }
 
     dokkaSourceSets.configureEach {
+        if (name == "commonMain") {
+            val dokkaModuleFile = file("docs/dokka-module.md")
+            if (dokkaModuleFile.exists()) {
+                includes.from(dokkaModuleFile)
+            }
+        }
         {% if has_dokka_source_link %}
         sourceLink {
             localDirectory.set(file("src"))
