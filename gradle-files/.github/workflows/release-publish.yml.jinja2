@@ -62,5 +62,4 @@ jobs:
           ORG_GRADLE_PROJECT_mavenCentralPassword: {% raw %}${{ secrets.MAVEN_PASSWORD }}{% endraw %}
           ORG_GRADLE_PROJECT_signingInMemoryKey: {% raw %}${{ secrets.MAVEN_GPG_PRIVATE_KEY }}{% endraw %}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: {% raw %}${{ secrets.MAVEN_GPG_PASSPHRASE }}{% endraw %}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyId: {% raw %}${{ secrets.MAVEN_GPG_KEY_ID }}{% endraw %}
         run: {{ release_publish_command }}
