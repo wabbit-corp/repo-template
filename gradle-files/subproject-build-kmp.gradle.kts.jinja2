@@ -73,6 +73,15 @@ mavenPublishing {
         }
     }
 }
+
+val localPublishRequested =
+    gradle.startParameter.taskNames.any { taskName -> "MavenLocal" in taskName }
+
+if (localPublishRequested) {
+    tasks.withType<org.gradle.plugins.signing.Sign>().configureEach {
+        enabled = false
+    }
+}
 {% endif %}
 
 kotlin {
