@@ -10,6 +10,11 @@ description = "{{ description }}"
 {% if keywords_toml %}keywords = {{ keywords_toml }}{% endif %}
 {% if classifiers_toml %}classifiers = {{ classifiers_toml }}{% endif %}
 {% if packages_toml %}packages = {{ packages_toml }}{% endif %}
+include = {{ include_toml }}
+exclude = {{ exclude_toml }}
+
+[tool.check-manifest]
+ignore = {{ check_manifest_ignore_toml }}
 
 {% if issue_tracker -%}
 [tool.poetry.urls]
