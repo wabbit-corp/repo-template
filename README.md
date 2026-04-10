@@ -73,6 +73,9 @@ libraryDependencies += "com.github.{{github-org}}" % "{{github-repo}}" % "{{proj
 
 This project is licensed under the [{{license-type}}](LICENSE.md) for open source use.
 
+Additional license notices and custom license texts, when needed, live in
+`NOTICE.md` and `LICENSES/`.
+
 For commercial use, please contact {{ company_legal_name }} (at {{ legal_contact_email }}) for licensing terms.
 
 ## Contributing

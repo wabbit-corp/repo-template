@@ -8,7 +8,7 @@ Unless otherwise noted, the production source code and other non-test project ma
 
 ## Test License
 
-Test suites, test fixtures, test data, benchmark code, and test-only helper code under the following repository path conventions are licensed under LicenseRef-Wabbit-Public-Test-License:
+Test suites, test fixtures, test data, benchmark code, and test-only helper code under the following repository path conventions are licensed under LicenseRef-Wabbit-Public-Test-License-1.1:
 
 - `test/**`
 - `tests/**`
@@ -690,7 +690,7 @@ the GNU AGPL, see <https://www.gnu.org/licenses/>.
 
 Copyright (c) 2026 Wabbit Consulting Corporation. All rights reserved.
 
-`SPDX-License-Identifier: LicenseRef-Wabbit-Public-Test-License`
+`SPDX-License-Identifier: LicenseRef-Wabbit-Public-Test-License-1.1`
 
 ## 1. Definitions
 
