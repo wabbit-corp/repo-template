@@ -24,6 +24,12 @@ jobs:
           java-version: "{{ java_version }}"
           cache: gradle
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
 {% if needs_android %}
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
@@ -31,5 +37,11 @@ jobs:
       - name: Ensure Gradle wrapper is executable
         run: chmod +x ./gradlew
 
+      - name: Install markdown docs tooling
+        run: python3 -m pip install --disable-pip-version-check mkdocs==1.6.1
+
       - name: Build and generate Dokka docs
         run: {{ docs_build_command }}
+
+      - name: Build markdown docs site
+        run: python3 scripts/build_pages_markdown_site.py --output-dir "$RUNNER_TEMP/pages-markdown"

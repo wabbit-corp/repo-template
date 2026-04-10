@@ -30,6 +30,12 @@ jobs:
           java-version: "{{ java_version }}"
           cache: gradle
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
 {% if needs_android %}
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
@@ -37,16 +43,27 @@ jobs:
       - name: Ensure Gradle wrapper is executable
         run: chmod +x ./gradlew
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+      - name: Install markdown docs tooling
+        run: python3 -m pip install --disable-pip-version-check mkdocs==1.6.1
 
       - name: Build Dokka docs
         run: {{ docs_build_command }}
 
+      - name: Assemble Pages site
+        run: |
+          SITE_DIR="$RUNNER_TEMP/pages-site"
+          rm -rf "$SITE_DIR"
+          mkdir -p "$SITE_DIR"
+          cp -R "{{ docs_output_dir }}/." "$SITE_DIR/"
+          python3 scripts/build_pages_markdown_site.py --output-dir "$SITE_DIR/docs"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: {{ docs_output_dir }}
+          path: ${{ runner.temp }}/pages-site
 
   deploy:
     needs: build
