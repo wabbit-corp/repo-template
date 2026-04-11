@@ -34,7 +34,8 @@ class RepoDocsEntry:
 
 RAW_ENTRIES: list[dict[str, JSONValue]] = {{ entries_literal }}
 REPO_NAME = {{ repo_name_literal }}
-REPO_URL = {{ repo_url_literal }}
+GITHUB_REPO = {{ github_repo_literal }}
+REPO_URL = ("https" + "://" + "github.com/" + GITHUB_REPO) if GITHUB_REPO is not None else None
 MKDOCS_REQUIREMENTS = [
     "mkdocs>=1.6,<2.0",
     "mkdocs-material>=9.6,<9.7",
@@ -221,6 +222,59 @@ def _build_python_mkdocs(
         )
 
 
+def _build_dotnet_mkdocs(
+    repo_root: Path,
+    output_dir: Path,
+    entry: RepoDocsEntry,
+    *,
+    mode: str,
+) -> None:
+    if entry.relative_project_path is None:
+        raise ValueError(f"Missing project path for {entry.title}")
+    project_path = repo_root / entry.relative_project_path
+    with tempfile.TemporaryDirectory(prefix=f"repo-docs-{entry.published_path}-") as temp_dir_name:
+        temp_dir = Path(temp_dir_name)
+        venv_dir = temp_dir / "venv"
+        python = _create_venv(venv_dir)
+        install_command = [
+            str(python),
+            "-m",
+            "pip",
+            "install",
+            *MKDOCS_REQUIREMENTS,
+        ]
+        if mode == "quality":
+            install_command.extend(["pytest", "codespell"])
+        _run(install_command, cwd=repo_root)
+
+        if mode == "quality":
+            dotnet_project_files = sorted(project_path.rglob("*.fsproj")) + sorted(project_path.rglob("*.csproj"))
+            if dotnet_project_files:
+                _run(["dotnet", "build", str(dotnet_project_files[0]), "-c", "Release", "--nologo"], cwd=repo_root)
+            if entry.has_changelog_guard_script and os.environ.get("GITHUB_EVENT_NAME") == "pull_request":
+                _run([str(python), "scripts/check_changelog_guard.py"], cwd=project_path)
+            if entry.has_generate_api_docs_script:
+                _run([str(python), "scripts/generate_api_docs.py", "--check"], cwd=project_path)
+            if entry.has_docs_links_script:
+                _run([str(python), "scripts/check_docs_links.py"], cwd=project_path)
+            if entry.has_docs_snippets_test:
+                _run([str(python), "-m", "pytest", "-q", "tests/test_docs_snippets.py"], cwd=project_path)
+            _run_codespell(python, project_path)
+
+        _run(
+            [
+                str(python),
+                "-m",
+                "mkdocs",
+                "build",
+                "--strict",
+                "--site-dir",
+                str(_docs_target_dir(output_dir, entry)),
+            ],
+            cwd=project_path,
+        )
+
+
 def _render_index(entries: list[RepoDocsEntry]) -> str:
     repo_title = REPO_NAME or "Repository docs"
     repo_link = ""
@@ -310,6 +364,8 @@ def main() -> int:
                 _copy_tree(source_path, _docs_target_dir(output_dir, entry))
             case "python-mkdocs":
                 _build_python_mkdocs(repo_root, output_dir, entry, mode=args.mode)
+            case "dotnet-mkdocs":
+                _build_dotnet_mkdocs(repo_root, output_dir, entry, mode=args.mode)
             case _:
                 raise ValueError(f"Unsupported repo docs entry kind: {entry.kind}")
 
