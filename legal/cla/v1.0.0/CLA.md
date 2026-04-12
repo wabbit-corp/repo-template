@@ -8,7 +8,7 @@ Thank you for your interest in contributing to the {{ company_legal_name }} ("{{
 
 - **"You"** means the individual or legal entity making the contribution.
 - **"Contribution"** means any original work of authorship, including any modifications or additions to an existing work, that is intentionally submitted by You to {{ company_short_name }} for inclusion in the Project, such as source code, documentation, or other materials. For example, submitting a pull request or patch via email constitutes a Contribution.
-- **"Project"** means the software project primarily licensed under the {{ project_primary_license_reference }} and managed by {{ company_short_name }}, with the understanding that {{ company_short_name }} may also offer commercial licensing options.
+- **"Project"** means the software project primarily licensed under {{ project_primary_license_reference }} and managed by {{ company_short_name }}, with the understanding that {{ company_short_name }} may also offer commercial licensing options.
 
 ### 2. Grant of Licenses
 

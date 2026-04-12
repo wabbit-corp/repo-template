@@ -1,4 +1,4 @@
-# Code of Excellence
+# Code of Excellence for {{ company_short_name }}
 
 ## Purpose
 

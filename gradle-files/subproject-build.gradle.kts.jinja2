@@ -25,6 +25,20 @@ import org.gradle.api.tasks.TaskAction
 import {{ inline_import }}
 {% endfor %}
 
+fun String.parseWabbitBooleanFlag(flagName: String): Boolean =
+    when (trim().lowercase()) {
+        "true" -> true
+        "false" -> false
+        else -> error("$flagName must be true or false, got '$this'")
+    }
+
+val useMavenLocalArtifacts =
+    providers.gradleProperty("wabbit.useMavenLocalArtifacts")
+        .orElse(providers.environmentVariable("WABBIT_USE_MAVEN_LOCAL_ARTIFACTS"))
+        .map { it.parseWabbitBooleanFlag("wabbit.useMavenLocalArtifacts") }
+        .orElse(false)
+        .get()
+
 {% if is_kotlin_compiler_gradle_plugin_project %}
 abstract class Generate{{ compiler_gradle_version_class_name }} : DefaultTask() {
     @get:Input
@@ -49,9 +63,17 @@ abstract class Generate{{ compiler_gradle_version_class_name }} : DefaultTask() 
 {% endif %}
 
 repositories {
+    if (useMavenLocalArtifacts) {
+        mavenLocal {
+            content {
+                includeGroup("one.wabbit")
+                includeGroupByRegex("one\\.wabbit\\..+")
+            }
+        }
+    }
     google()
     mavenCentral()
-    {% if 'intellij-plugin' in features and use_intellij_platform_gradle_plugin_v2 %}
+    {% if uses_intellij_platform_dependencies %}
     intellijPlatform {
         defaultRepositories()
     }
@@ -109,6 +131,8 @@ plugins {
     {% else %}
     id("org.jetbrains.intellij")
     {% endif %}
+    {% elif 'intellij-platform-library' in features %}
+    id("org.jetbrains.intellij.platform")
     {% endif %}
     {% for plugin in extra_gradle_plugins %}
     id("{{ plugin.plugin_id }}")
@@ -195,6 +219,12 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-gradle-plugin:{% if uses_repo_kotlin_version %}$kotlinVersion{% else %}{{ kotlin_version }}{% endif %}")
     testImplementation(gradleApi())
     testImplementation(gradleTestKit())
+    {%- elif is_kotlin_gradle_plugin_library_project -%}
+    compileOnly(gradleApi())
+    compileOnly("org.jetbrains.kotlin:kotlin-gradle-plugin:{% if uses_repo_kotlin_version %}$kotlinVersion{% else %}{{ kotlin_version }}{% endif %}")
+    testImplementation("org.jetbrains.kotlin:kotlin-gradle-plugin:{% if uses_repo_kotlin_version %}$kotlinVersion{% else %}{{ kotlin_version }}{% endif %}")
+    testImplementation(gradleApi())
+    testImplementation(gradleTestKit())
     {%- elif is_gradle_plugin_project -%}
     compileOnly("org.jetbrains.kotlin:kotlin-gradle-plugin-api:{{ kotlin_version }}")
     testImplementation("org.jetbrains.kotlin:kotlin-gradle-plugin-api:{{ kotlin_version }}")
@@ -207,21 +237,17 @@ dependencies {
     {% if 'kotlin' in features -%}
         testImplementation(kotlin("test"))
     {%- endif %}
-    {% if 'intellij-plugin' in features and use_intellij_platform_gradle_plugin_v2 -%}
+    {% if uses_intellij_platform_dependencies -%}
         intellijPlatform {
-            intellijIdea("{{ features['intellij-plugin'].ideaVersion or '2025.3' }}") {
+            intellijIdea("{{ intellij_platform_idea_version }}") {
                 useInstaller = false
             }
             jetbrainsRuntime()
             bundledPlugins(
                 listOf(
-                    {%- if features['intellij-plugin'].bundledPlugins %}
-                    {%- for plugin in features['intellij-plugin'].bundledPlugins %}
+                    {%- for plugin in intellij_platform_bundled_plugins %}
                     "{{ plugin }}"{% if not loop.last %}, {% endif %}
                     {%- endfor %}
-                    {%- else %}
-                    "com.intellij.java"
-                    {%- endif %}
                 )
             )
             testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
